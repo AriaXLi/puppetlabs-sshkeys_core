@@ -7,7 +7,7 @@ RSpec.context 'sshkeys: Modify' do
   let(:ssh_known_hosts) { '/etc/ssh/ssh_known_hosts' }
 
   before(:each) do
-    posix_agents.agents.each do |agent|
+    agents.agents.each do |agent|
       # The 'cp' might fail because the source file doesn't exist
       on(
         agent,
@@ -24,7 +24,7 @@ CMD
   end
 
   after(:each) do
-    posix_agents.each do |agent|
+    agents.each do |agent|
       # Is it present?
       rc = on(
         agent,
@@ -50,7 +50,7 @@ CMD
     end
   end
 
-  posix_agents.each do |agent|
+  agents.each do |agent|
     it "#{agent} should update an rsa entry for an SSH known host key" do
       args = ['ensure=present',
               "type='rsa'",

@@ -7,7 +7,7 @@ RSpec.context 'sshkeys: Create' do
   let(:ssh_known_hosts) { '/etc/ssh/ssh_known_hosts' }
 
   before(:each) do
-    posix_agents.agents.each do |agent|
+    agents.agents.each do |agent|
       # The 'cp' might fail because the source file doesn't exist
       on(
         agent,
@@ -18,7 +18,7 @@ RSpec.context 'sshkeys: Create' do
   end
 
   after(:each) do
-    posix_agents.each do |agent|
+    agents.each do |agent|
       # Is it present?
       rc = on(
         agent,
@@ -44,7 +44,7 @@ RSpec.context 'sshkeys: Create' do
     end
   end
 
-  posix_agents.each do |agent|
+  agents.each do |agent|
     it "#{agent} should add an SSH key to the correct ssh_known_hosts file (OS X/macOS - PUP-5508)" do
       # Is it even there?
       rc = on(
@@ -72,7 +72,7 @@ RSpec.context 'sshkeys: Create' do
     end
   end
 
-  posix_agents.each do |agent|
+  agents.each do |agent|
     it "#{agent} should allow to add two different type keys for the same host" do
       # Is it even there?
       rc = on(
